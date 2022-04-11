@@ -1,26 +1,25 @@
-import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+
+import React from 'react';
+
+import { Header } from './components/Header';
+import { Todo } from './components/todo';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className='App'>
+      <div className='todo-app'>
+        <Header />
+        <Todo />
+      </div>
     </div>
   );
 }
 
 export default App;
+
+// TODO: feature - make animation for create,delete,render(use ui library);
+// TODO: feature - add footer for todo(search, filter, category);
+// TODO: feature - maybe add css variables;
+// TODO: chore - refactor(make code readable);
+// TODO: feature - maybe add redux in project;

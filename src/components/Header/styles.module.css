@@ -1,0 +1,10 @@
+.header {
+  color: #000;
+}
+
+.title {
+  font-size: 3em;
+  font-weight: 400;
+  text-transform: uppercase;
+  padding: 25px 0;
+}
