@@ -1,5 +1,6 @@
 import './App.css';
 
+import { motion } from 'framer-motion';
 import React from 'react';
 
 import { Header } from './components/Header';
@@ -8,10 +9,15 @@ import { Todo } from './components/todo';
 function App() {
   return (
     <div className='App'>
-      <div className='todo-app'>
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 0.3 }}
+        className='todo-app'
+      >
         <Header />
         <Todo />
-      </div>
+      </motion.div>
     </div>
   );
 }

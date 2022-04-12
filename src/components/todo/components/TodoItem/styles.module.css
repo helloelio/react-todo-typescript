@@ -7,7 +7,7 @@
   padding: 0.75em;
   border-radius: 6px;
   margin-bottom: 5px;
-  animation: create 1s ease;
+  /* animation: create 1s ease; */
 }
 
 .button {
@@ -33,7 +33,7 @@
   box-shadow: inset 1px 1px 5px 0 #86333a;
 }
 
-@keyframes create {
+/* @keyframes create {
   0% {
     opacity: 0;
   }
@@ -67,4 +67,4 @@
   100% {
     opacity: 1;
   }
-}
+} */

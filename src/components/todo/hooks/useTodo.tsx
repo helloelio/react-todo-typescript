@@ -7,7 +7,13 @@ export const useTodo = () => {
   const [todoText, setTodoText] = useState<string>('');
   const [inputError, setInputError] = useState<boolean>(false);
   const [processing, setProcessing] = useState<boolean>(false);
-  const [list, setList] = useState<ITodo[]>([]);
+  const [list, setList] = useState<ITodo[]>([
+    { todoText: '123', id: 1 },
+    { todoText: '123', id: 2 },
+    { todoText: '123', id: 3 },
+    { todoText: '123', id: 4 },
+    { todoText: '123', id: 5 },
+  ]);
 
   const handleChangeInput: ChangeEventHandler<HTMLInputElement> = ({
     target: { value },

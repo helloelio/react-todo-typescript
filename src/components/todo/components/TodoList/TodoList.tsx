@@ -1,5 +1,4 @@
 import React from 'react';
-
 import { ITodo } from '../../../../config/interfaces';
 import { TodoItem } from '../TodoItem';
 import style from './styles.module.css';

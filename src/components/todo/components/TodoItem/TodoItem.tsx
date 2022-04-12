@@ -3,6 +3,7 @@ import React from 'react';
 import { ITodo } from '../../../../config/interfaces';
 import { Button } from '../../../../UIElements/Button';
 import style from './styles.module.css';
+import { motion } from 'framer-motion';
 
 interface Props {
   todo: ITodo;
@@ -10,8 +11,25 @@ interface Props {
 }
 
 export const TodoItem = ({ todo, handleRemoveTodo }: Props) => {
+  const todoVariants = {
+    visible: (i: any) => ({
+      opacity: 1,
+      x: 0,
+      transition: {
+        delay: i * 0.4,
+      },
+    }),
+    hidden: { opacity: 0, x: -100 },
+  };
+
   return (
-    <li className={style.todo}>
+    <motion.li
+      className={style.todo}
+      variants={todoVariants}
+      initial='hidden'
+      animate='visible'
+      custom={todo.id}
+    >
       <span>{todo.todoText}</span>
       <Button
         onClick={() => handleRemoveTodo(todo.id)}
@@ -19,6 +37,6 @@ export const TodoItem = ({ todo, handleRemoveTodo }: Props) => {
       >
         x
       </Button>
-    </li>
+    </motion.li>
   );
 };

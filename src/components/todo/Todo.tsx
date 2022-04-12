@@ -1,6 +1,8 @@
-import React from 'react';
+import { motion } from 'framer-motion';
+import React, { useEffect, useState } from 'react';
 
 import { Container } from '../Container';
+import { ErrorMessage } from './components/ErrorMessage';
 import { TodoFooter } from './components/TodoFooter';
 import { TodoForm } from './components/TodoForm/TodoFrom';
 import { TodoList } from './components/TodoList';
@@ -18,23 +20,45 @@ export const Todo: React.FC = () => {
     list,
   } = useTodo();
 
+  const [errorDisplay, setErrorDisplay] = useState(false);
+
+  useEffect(() => {
+    setTimeout(() => {
+      if (inputError) {
+        setErrorDisplay(true);
+      } else {
+        setErrorDisplay(false);
+      }
+    }, 400);
+  }, [inputError]);
+
   return (
     <>
       <Container>
-        {inputError ? (
-          <p className={style.empty}> You cannot add an empty to-do. </p>
+        {errorDisplay ? (
+          <ErrorMessage
+            errorText='You cannot add an empty to-do!'
+            error={inputError}
+          />
         ) : null}
         <TodoForm
           handleAddTodo={handleAddTodo}
           handleChangeInput={handleChangeInput}
-          inputError={inputError}
+          inputError={errorDisplay}
           todoText={todoText}
           processing={processing}
         />
         {list.length > 0 ? (
           <TodoList list={list} handleRemoveTodo={handleRemoveTodo} />
         ) : (
-          <h1 className={style.empty}>List is empty.</h1>
+          <motion.h1
+            className={style.empty}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.5 }}
+          >
+            No to-do to complete!
+          </motion.h1>
         )}
       </Container>
       <TodoFooter />
