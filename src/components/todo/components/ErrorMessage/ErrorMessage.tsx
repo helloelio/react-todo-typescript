@@ -2,7 +2,12 @@ import { motion } from 'framer-motion';
 import React from 'react';
 import style from './styles.module.css';
 
-export const ErrorMessage = ({ errorText, error }: any) => {
+interface Props {
+  errorText: string;
+  error: boolean;
+}
+
+export const ErrorMessage = ({ errorText, error }: Props) => {
   return (
     <motion.p
       initial={{ x: 1000 }}
