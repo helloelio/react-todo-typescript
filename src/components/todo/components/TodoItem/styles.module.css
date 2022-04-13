@@ -7,7 +7,14 @@
   padding: 0.75em;
   border-radius: 6px;
   margin-bottom: 5px;
+  background-color: #fff;
+  box-shadow: 0 8px 15px 0 rgba(31, 38, 135, 0.37);
+  backdrop-filter: blur(16.5px);
+  -webkit-backdrop-filter: blur(16.5px);
   /* animation: create 1s ease; */
+}
+.todo:hover {
+  cursor: pointer;
 }
 
 .button {

@@ -1,19 +1,21 @@
-import React, { ChangeEventHandler, useState } from 'react';
+import React, { ChangeEventHandler, useEffect, useState } from 'react';
 
 import { ITodo } from '../../../config/interfaces';
 
 export const useTodo = () => {
+  const listFromStorage: any = localStorage.getItem('list');
+
   const [id, setId] = useState<number>(1);
   const [todoText, setTodoText] = useState<string>('');
   const [inputError, setInputError] = useState<boolean>(false);
   const [processing, setProcessing] = useState<boolean>(false);
-  const [list, setList] = useState<ITodo[]>([
-    { todoText: '123', id: 1 },
-    { todoText: '123', id: 2 },
-    { todoText: '123', id: 3 },
-    { todoText: '123', id: 4 },
-    { todoText: '123', id: 5 },
-  ]);
+  const [list, setList] = useState<ITodo[]>(JSON.parse(listFromStorage) || []);
+  const [delayForFooter, setDelayForFooter] = useState<number>(0);
+
+  useEffect(() => {
+    localStorage.setItem('list', JSON.stringify(list));
+    setDelayForFooter(list.length > 0 ? list.length : 1);
+  }, [list]);
 
   const handleChangeInput: ChangeEventHandler<HTMLInputElement> = ({
     target: { value },
@@ -32,7 +34,7 @@ export const useTodo = () => {
       } else {
         setList((prevState): any => [...prevState, { todoText, id }]);
         setTodoText('');
-        setId((prevState) => prevState + 1);
+        setId(list.length + 2);
       }
       setProcessing(false);
     }, 500);
@@ -49,6 +51,7 @@ export const useTodo = () => {
     todoText,
     inputError,
     processing,
+    delayForFooter,
     handleRemoveTodo,
     handleChangeInput,
     handleAddTodo,

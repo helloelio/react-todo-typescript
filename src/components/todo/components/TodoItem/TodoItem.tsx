@@ -29,11 +29,14 @@ export const TodoItem = ({ todo, handleRemoveTodo }: Props) => {
       initial='hidden'
       animate='visible'
       custom={todo.id}
+      whileHover={{ scale: 1.01 }}
+      whileTap={{ scale: 0.99 }}
     >
       <span>{todo.todoText}</span>
       <Button
         onClick={() => handleRemoveTodo(todo.id)}
         className={style.button}
+        title='Delete to-do'
       >
         x
       </Button>

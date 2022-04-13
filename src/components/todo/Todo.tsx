@@ -14,6 +14,7 @@ export const Todo: React.FC = () => {
     handleAddTodo,
     handleRemoveTodo,
     handleChangeInput,
+    delayForFooter,
     inputError,
     todoText,
     processing,
@@ -61,7 +62,7 @@ export const Todo: React.FC = () => {
           </motion.h1>
         )}
       </Container>
-      <TodoFooter />
+      <TodoFooter delayForFooter={delayForFooter} />
     </>
   );
 };
