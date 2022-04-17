@@ -62,7 +62,7 @@ export const Todo: React.FC = () => {
           </motion.h1>
         )}
       </Container>
-      <TodoFooter delayForFooter={delayForFooter} />
+      <TodoFooter numberOfItems={list.length} delayForFooter={delayForFooter} />
     </>
   );
 };

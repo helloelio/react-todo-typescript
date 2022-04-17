@@ -12,14 +12,14 @@ interface Props {
 
 export const TodoItem = ({ todo, handleRemoveTodo }: Props) => {
   const todoVariants = {
-    visible: (i: any) => ({
+    visible: (i: number) => ({
       opacity: 1,
       x: 0,
       transition: {
         delay: i * 0.4,
       },
     }),
-    hidden: { opacity: 0, x: -100 },
+    hidden: { opacity: 0, x: -1000 },
   };
 
   return (
@@ -28,7 +28,7 @@ export const TodoItem = ({ todo, handleRemoveTodo }: Props) => {
       variants={todoVariants}
       initial='hidden'
       animate='visible'
-      custom={todo.id}
+      custom={todo}
       whileHover={{ scale: 1.01 }}
       whileTap={{ scale: 0.99 }}
     >

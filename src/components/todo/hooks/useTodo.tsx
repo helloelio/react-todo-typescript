@@ -1,11 +1,9 @@
 import React, { ChangeEventHandler, useEffect, useState } from 'react';
-
+import { v4 as uuidv4 } from 'uuid';
 import { ITodo } from '../../../config/interfaces';
 
 export const useTodo = () => {
   const listFromStorage: any = localStorage.getItem('list');
-
-  const [id, setId] = useState<number>(1);
   const [todoText, setTodoText] = useState<string>('');
   const [inputError, setInputError] = useState<boolean>(false);
   const [processing, setProcessing] = useState<boolean>(false);
@@ -29,12 +27,11 @@ export const useTodo = () => {
     setProcessing(true);
     setTimeout(() => {
       if (todoText.trim().length === 0) {
-        console.log('error -> is empty');
         setInputError(true);
       } else {
+        const id = uuidv4();
         setList((prevState): any => [...prevState, { todoText, id }]);
         setTodoText('');
-        setId(list.length + 2);
       }
       setProcessing(false);
     }, 500);
