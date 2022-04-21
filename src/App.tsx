@@ -1,26 +1,34 @@
 import './App.css';
 
+import { Flex } from '@chakra-ui/react';
 import { motion } from 'framer-motion';
 import React from 'react';
 
 import { Header } from './components/Header';
 import { Todo } from './components/todo';
 
-function App() {
+export const App: React.FC = () => {
   return (
     <div className='App'>
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 0.3 }}
-        className='todo-app'
+      <Flex
+        justify='center'
+        align='center'
+        bg='#1A203A'
+        transition='all .5s ease'
       >
-        <Header />
-        <Todo />
-      </motion.div>
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.3 }}
+          className='todo-app'
+        >
+          <Header />
+          <Todo />
+        </motion.div>
+      </Flex>
     </div>
   );
-}
+};
 
 export default App;
 

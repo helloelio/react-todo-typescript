@@ -1,11 +1,18 @@
+import { Box, Heading } from '@chakra-ui/react';
 import React from 'react';
 
-import style from './styles.module.css';
-
-export const Header: React.FC = () => {
+export const Header = () => {
   return (
-    <header className={style.header}>
-      <h1 className={style.title}>Things to do </h1>
-    </header>
+    <Box>
+      <Heading
+        as='h1'
+        fontSize='4rem'
+        padding='5'
+        textAlign='center'
+        color='purple.50'
+      >
+        To-do
+      </Heading>
+    </Box>
   );
 };

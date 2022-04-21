@@ -1,9 +1,16 @@
+import { DeleteIcon } from '@chakra-ui/icons';
+import {
+  Box,
+  Editable,
+  EditableInput,
+  EditablePreview,
+  Tag,
+  Tooltip,
+} from '@chakra-ui/react';
 import React from 'react';
 
 import { ITodo } from '../../../../config/interfaces';
-import { Button } from '../../../../UIElements/Button';
 import style from './styles.module.css';
-import { motion } from 'framer-motion';
 
 interface Props {
   todo: ITodo;
@@ -11,35 +18,33 @@ interface Props {
 }
 
 export const TodoItem = ({ todo, handleRemoveTodo }: Props) => {
-  const todoVariants = {
-    visible: (i: number) => ({
-      opacity: 1,
-      x: 0,
-      transition: {
-        delay: i * 0.4,
-      },
-    }),
-    hidden: { opacity: 0, x: -1000 },
-  };
-
   return (
-    <motion.li
-      className={style.todo}
-      variants={todoVariants}
-      initial='hidden'
-      animate='visible'
-      custom={todo}
-      whileHover={{ scale: 1.01 }}
-      whileTap={{ scale: 0.99 }}
-    >
-      <span>{todo.todoText}</span>
-      <Button
+    <li className={style.todo}>
+      <Tag colorScheme='messenger' position='absolute' top='-2' left='-2'>
+        {todo.date}
+      </Tag>
+      <Tooltip label='You can edit your task!' placement='top'>
+        <Editable defaultValue={todo.todoText}>
+          <EditablePreview />
+          <EditableInput />
+        </Editable>
+      </Tooltip>
+      <Box
+        transition='all .3s ease'
+        display='flex'
+        justifyContent='center'
+        alignItems='center'
+        w={10}
+        h={10}
+        borderRadius='50%'
+        bg='blackAlpha.100'
         onClick={() => handleRemoveTodo(todo.id)}
-        className={style.button}
-        title='Delete to-do'
+        cursor='pointer'
+        _hover={{ bg: '#e53e3e' }}
+        _active={{ scale: '0.95' }}
       >
-        x
-      </Button>
-    </motion.li>
+        <DeleteIcon w={5} h={5} />
+      </Box>
+    </li>
   );
 };

@@ -1,6 +1,7 @@
+import { Box, Flex } from '@chakra-ui/react';
 import { motion } from 'framer-motion';
 import React, { useEffect, useState } from 'react';
-
+import { Text } from '@chakra-ui/react';
 import { Select } from '../../../../UIElements/Select';
 import style from './styles.module.css';
 
@@ -40,16 +41,28 @@ export const TodoFooter = ({ delayForFooter, numberOfItems }: any) => {
           initial='hidden'
           animate='visible'
         >
-          <div className={style.footerContent}>
-            <div className={style.footerLeft}>
+          <Box
+            position='fixed'
+            bottom='0'
+            left='0'
+            right='0'
+            bg='purple.50'
+            display='flex'
+            justifyContent='space-between'
+            alignItems='center'
+            padding='2'
+          >
+            <Flex align='center' className={style.footerLeft}>
               <span>add/search</span>
               <span className={style.line}></span>
-              <span className={style.numbers}>{numberOfItems} items</span>
-            </div>
-            <div className={style.footerRight}>
+              <Text marginLeft='4'>
+                {numberOfItems > 0 ? `${numberOfItems} items` : `Empty list.`}
+              </Text>
+            </Flex>
+            <Flex align='center' className={style.footerRight}>
               <Select options={targets} value={target} onChange={setTarget} />
-            </div>
-          </div>
+            </Flex>
+          </Box>
         </motion.div>
       ) : null}
     </div>

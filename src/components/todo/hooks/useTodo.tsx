@@ -30,7 +30,8 @@ export const useTodo = () => {
         setInputError(true);
       } else {
         const id = uuidv4();
-        setList((prevState): any => [...prevState, { todoText, id }]);
+        const date = new Date().toLocaleDateString();
+        setList((prevState): any => [...prevState, { todoText, id, date }]);
         setTodoText('');
       }
       setProcessing(false);
@@ -43,6 +44,10 @@ export const useTodo = () => {
     }, 1000);
   };
 
+  const handleCloseAlert = () => {
+    setInputError(false);
+  };
+
   return {
     list,
     todoText,
@@ -52,5 +57,6 @@ export const useTodo = () => {
     handleRemoveTodo,
     handleChangeInput,
     handleAddTodo,
+    handleCloseAlert,
   };
 };

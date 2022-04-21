@@ -1,19 +1,26 @@
-import { motion } from 'framer-motion';
-import React, { useEffect, useState } from 'react';
+import {
+  Alert,
+  AlertDescription,
+  AlertIcon,
+  AlertTitle,
+  Box,
+  CloseButton,
+  Fade,
+} from '@chakra-ui/react';
+import React from 'react';
 
 import { Container } from '../Container';
-import { ErrorMessage } from './components/ErrorMessage';
 import { TodoFooter } from './components/TodoFooter';
-import { TodoForm } from './components/TodoForm/TodoFrom';
+import { TodoForm } from './components/TodoForm/TodoForm';
 import { TodoList } from './components/TodoList';
 import { useTodo } from './hooks/useTodo';
-import style from './styles.module.css';
 
 export const Todo: React.FC = () => {
   const {
     handleAddTodo,
     handleRemoveTodo,
     handleChangeInput,
+    handleCloseAlert,
     delayForFooter,
     inputError,
     todoText,
@@ -21,48 +28,57 @@ export const Todo: React.FC = () => {
     list,
   } = useTodo();
 
-  const [errorDisplay, setErrorDisplay] = useState(false);
-
-  useEffect(() => {
-    setTimeout(() => {
-      if (inputError) {
-        setErrorDisplay(true);
-      } else {
-        setErrorDisplay(false);
-      }
-    }, 400);
-  }, [inputError]);
-
   return (
-    <>
+    <Box>
       <Container>
-        {errorDisplay ? (
-          <ErrorMessage
-            errorText='You cannot add an empty to-do!'
-            error={inputError}
-          />
-        ) : null}
+        {inputError && (
+          <Fade in={inputError} unmountOnExit={inputError}>
+            <Alert
+              status='error'
+              bg='red.500'
+              color='#ffffff'
+              position='fixed'
+              top='5'
+              right='5'
+              width='50'
+            >
+              <AlertIcon color='#ffffff' />
+              <AlertTitle mr={2}>You can't add empty to-do!</AlertTitle>
+              <CloseButton onClick={handleCloseAlert} />
+            </Alert>
+          </Fade>
+        )}
         <TodoForm
           handleAddTodo={handleAddTodo}
           handleChangeInput={handleChangeInput}
-          inputError={errorDisplay}
+          inputError={inputError}
           todoText={todoText}
           processing={processing}
         />
         {list.length > 0 ? (
           <TodoList list={list} handleRemoveTodo={handleRemoveTodo} />
         ) : (
-          <motion.h1
-            className={style.empty}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.5 }}
+          <Alert
+            status='info'
+            variant='solid'
+            flexDirection='column'
+            alignItems='center'
+            justifyContent='center'
+            textAlign='center'
+            height='150px'
+            mb='10'
           >
-            No to-do to complete!
-          </motion.h1>
+            <AlertIcon boxSize='40px' mr={0} />
+            <AlertTitle mt={4} mb={1} fontSize='lg'>
+              No to-do to complete!
+            </AlertTitle>
+            <AlertDescription maxWidth='sm' fontSize='large'>
+              You can add to-do for your list
+            </AlertDescription>
+          </Alert>
         )}
       </Container>
       <TodoFooter numberOfItems={list.length} delayForFooter={delayForFooter} />
-    </>
+    </Box>
   );
 };
