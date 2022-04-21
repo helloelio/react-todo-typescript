@@ -1,0 +1,37 @@
+.todo {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  text-align: left;
+  border: 1px solid #ccc;
+  padding: 1em 0.5em;
+  border-radius: 6px;
+  margin-bottom: 15px;
+  background-color: #fff;
+  word-break: break-all;
+}
+
+.button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #fe606d;
+  cursor: pointer;
+  font-weight: bold;
+  color: white;
+  transition: transform ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+  -webkit-transition: transform ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+  -moz-transition: transform ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+  -ms-transition: transform ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+  -o-transition: transform ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+}
+.button:hover {
+  background: #fe606d;
+  transform: scale(1.05);
+  box-shadow: 1px 1px 5px 0 #86333a;
+}
+.button:active {
+  transform: scale(1);
+  box-shadow: inset 1px 1px 5px 0 #86333a;
+}
